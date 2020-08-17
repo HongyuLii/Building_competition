@@ -21,7 +21,12 @@ var commentRoutes    = require("./routes/comments"),
 
 
 // mongoose.connect("mongodb://localhost/building_competition_updated", {useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/building-competition')
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/building-competition')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/building-competition').then(() => {
+console.log("Connected to Database");
+}).catch((err) => {
+    console.log("Not Connected to Database ERROR! ", err);
+});
 app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine", "ejs")
 app.use(express.static(__dirname + "/public"));
