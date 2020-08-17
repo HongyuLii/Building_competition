@@ -1,3 +1,4 @@
+require('dotenv').config()
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");//for req below
@@ -19,7 +20,8 @@ var commentRoutes    = require("./routes/comments"),
 
 
 
-mongoose.connect("mongodb://localhost/building_competition_updated", {useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose.connect("mongodb://localhost/building_competition_updated", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/building-competition')
 app.use(bodyParser.urlencoded({extended: true}))
 app.set("view engine", "ejs")
 app.use(express.static(__dirname + "/public"));
@@ -49,6 +51,5 @@ app.use("/", indexRoutes);
 app.use("/competitions", competitionRoutes);
 app.use("/competitions/:id/comments", commentRoutes);
 
-app.listen(3000, function(){
-    console.log("Building_Competition Server Has Started!");
-});
+const port = process.env.PORT || 3000;
+app.listen(port);
