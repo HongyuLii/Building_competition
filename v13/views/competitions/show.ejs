@@ -1,0 +1,82 @@
+<%- include('../partials/header.ejs'); %>
+<div class="container">
+    <div class="container thumbnail col-lg" style="margin: 20px">
+        <div class="header">
+            <h3>
+                <%=competition.name%>
+            </h3>
+            <p>
+                <%= competition.author.username %>
+            </p>
+        </div>
+        <img class = "displayed card-img-thumbnail" src="<%= competition.image %>">
+    </div>
+
+    <div class="container Introduction">
+        <div class="content">
+            <h4><a>Introduction</a></h1>
+            <p><%= competition.description %></p>
+        </div>
+    </div>
+
+    <div class="col-lg detail_info" style="margin: 20px">
+        <div class = "row">
+            <div class = "col-lg-3 title_box">
+                <div class = "card-body">
+                    <h4><a>Data Analysis</a></h1>
+                </div>
+            </div>
+            <div class = "col-lg-9 des_box">
+                <div class = "card-body">
+                    <h4><a><%=competition.data%></a></h1>
+                </div>
+            </div>
+        </div>
+        <div class = "row" style = "margin-top: 30px">
+            <div class = "col-lg-9 des_box">
+                <div class = "card-body">
+                    <h4><a><%=competition.conclusion%></a></h1>
+                </div>
+            </div>
+            <div class = "col-lg-3 title_box">
+                <div class = "card-body">
+                    <h4><a><%=competition.conclusion%></a></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% if(currentUser && competition.author.id.equals(currentUser._id)){ %>
+        <div class = "row" style = "margin-left: 1px">
+            <a class="btn btn-sm btn-warning" href="/competitions/<%= competition._id %>/edit">Edit</a>
+            <form id="delete-form" action="/competitions/<%= competition._id %>?_method=DELETE" method="POST">
+                <button class="btn btn-sm btn-danger">Delete</button>
+            </form>
+        </div>
+    <% }%>
+
+    <!-- <div class="card bg-light">
+        <div class="card-body">
+            <div class="text-right">
+                <a class="btn btn-sm btn-dark" href="/competitions/<%= competition._id %>/comments/new">Suggestions</a>
+            </div>
+            <% competition.comments.forEach(function(comment){ %>
+                <div class="row card bg-light">
+                    <div class="col-md-12">
+                        <strong><%= comment.author.username %></strong>
+                        <p>
+                            <%= comment.text %> 
+                        </p>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-sm btn-warning" 
+                               href="/competitions/<%=competition._id %>/comments/<%=comment._id %>/edit">Edit</a>
+                            <form id="delete-form" action="/competitions/<%=competition._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                            </form>
+                        <% } %>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div> -->
+</div>
+<%- include('../partials/footer.ejs'); %>

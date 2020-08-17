@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Building Competition</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/main.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="margin-bottom: 30px">
+            <a class="navbar-brand" href="/">Building Competition</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                </ul>
+                <ul class="navbar-nav">
+                    <% if(!currentUser){ %>
+                     <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/">|</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/register">Signup</a>
+                      </li>
+                    <% } else { %>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/"><%= currentUser.username %></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/">|</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                      </li>
+                    <% } %>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+          <% if(error && error.length > 0){ %>
+              <div class="alert alert-warning" role="alert">
+                  <%= error %>
+              </div>
+          <% } %>
+          <% if(success && success.length > 0){ %>
+              <div class="alert alert-success" role="alert">
+                  <%= success %>
+              </div>
+          <% } %>
+      </div>
+
+    <!-- https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css -->
+        <!-- https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css -->
+        

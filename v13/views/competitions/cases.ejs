@@ -1,0 +1,36 @@
+<%- include('../partials/header.ejs'); %>
+
+<div class = "container">
+    <header class="jumbotron">
+        <div>
+            <h1>View our competitions</h1>
+            <p>
+                <a class= "btn btn-dark btn-large" href="/competitions/new">Add New Competitions</a>
+            </p>
+        </div>
+    </header>
+    
+    <% competitions.forEach(function(competition){ %>
+        <div class="thumbnail card" style = "margin: 10px">
+            <div class = "row">
+                <div class="col-md-6">
+                    <figure class="thumbnail" style = "height: 50%">
+                        <img src="<%= competition.image %>" class="img-thumbnail img-fluid" alt="<%= competition.name %>">
+                    </figure>
+                </div>
+                <div class="container col-md-6" style="text-align: center">
+                    <p>
+                        <a href="/competitions/<%= competition._id %>" class="btn btn-dark btn-sm" style = "margin-top: 5px"><%= competition.name %></a>
+                    </p>
+                    <p>
+                        <%= competition.description %></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+     <% }); %>
+    
+</div>
+
+
+<%- include('../partials/footer.ejs'); %>
